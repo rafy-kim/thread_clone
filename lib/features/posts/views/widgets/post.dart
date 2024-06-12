@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:navigation_time/constants/gaps.dart';
 import 'package:navigation_time/constants/sizes.dart';
+import 'package:navigation_time/features/posts/views/widgets/modal_sheet.dart';
+import 'package:navigation_time/features/posts/views/widgets/post_more.dart';
 
 class Post extends StatelessWidget {
   final String userName;
@@ -13,6 +15,17 @@ class Post extends StatelessWidget {
     required this.content,
     required this.imgs,
   });
+
+  void _onMoreTap(BuildContext context) async {
+    await showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      // barrierColor: Colors.red,
+      // backgroundColor: Colors.transparent,
+      builder: (context) => const ModalSheet(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +125,6 @@ class Post extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Text(
-                              content,
-                              style: TextStyle(
-                                color: Colors.grey.shade800,
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -129,9 +136,19 @@ class Post extends StatelessWidget {
                         ),
                       ),
                       Gaps.h10,
-                      const Icon(Icons.more_horiz),
+                      GestureDetector(
+                        onTap: () => _onMoreTap(context),
+                        child: const Icon(Icons.more_horiz),
+                      ),
                     ],
                   ),
+                  Text(
+                    content,
+                    style: TextStyle(
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+
                   Gaps.v10,
                   // Post image
                   if (imgs.isNotEmpty)

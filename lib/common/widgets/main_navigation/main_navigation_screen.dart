@@ -5,6 +5,8 @@ import 'package:navigation_time/common/widgets/main_navigation/widgets/nav_tab.d
 import 'package:navigation_time/constants/gaps.dart';
 import 'package:navigation_time/constants/sizes.dart';
 import 'package:navigation_time/features/posts/views/post_timeline_screen.dart';
+import 'package:navigation_time/features/posts/views/widgets/modal_sheet.dart';
+import 'package:navigation_time/features/posts/views/widgets/new_post.dart';
 import 'package:navigation_time/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -30,11 +32,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   late int _selectedIndex = _tabs.indexOf(widget.tab);
 
-  void _onTap(int index) {
-    context.go("/${_tabs[index]}");
-    setState(() {
-      _selectedIndex = index;
-    });
+  void _onTap(int index) async {
+    if (index == 2) {
+      await showModalBottomSheet(
+        context: context,
+        // showDragHandle: true,
+        isScrollControlled: true,
+        // barrierColor: Colors.red,
+        // backgroundColor: Colors.transparent,
+        builder: (context) => const NewPost(),
+      );
+    } else {
+      context.go("/${_tabs[index]}");
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
