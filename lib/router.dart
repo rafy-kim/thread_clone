@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:navigation_time/common/widgets/main_navigation/main_navigation_screen.dart';
 
 final router = GoRouter(
-  initialLocation: "/home",
+  initialLocation: "/search",
   routes: [
     GoRoute(
       name: MainNavigationScreen.routeName,

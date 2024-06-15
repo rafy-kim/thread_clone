@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:navigation_time/common/widgets/main_navigation/widgets/nav_tab.dart';
 import 'package:navigation_time/constants/gaps.dart';
 import 'package:navigation_time/constants/sizes.dart';
+import 'package:navigation_time/features/activity/views/activity_screen.dart';
 import 'package:navigation_time/features/posts/views/post_timeline_screen.dart';
 import 'package:navigation_time/features/posts/views/widgets/modal_sheet.dart';
 import 'package:navigation_time/features/posts/views/widgets/new_post.dart';
+import 'package:navigation_time/features/search/views/search_screen.dart';
 import 'package:navigation_time/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -68,7 +70,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(
             offstage: _selectedIndex != 1,
             // child: const DiscoverScreen(),
-            child: const Placeholder(),
+            child: const SearchScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 2,
@@ -78,7 +80,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(
             offstage: _selectedIndex != 3,
             // child: const InboxScreen(),
-            child: const Placeholder(),
+            child: const ActivityScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 4,
