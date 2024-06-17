@@ -9,6 +9,7 @@ import 'package:navigation_time/features/posts/views/post_timeline_screen.dart';
 import 'package:navigation_time/features/posts/views/widgets/modal_sheet.dart';
 import 'package:navigation_time/features/posts/views/widgets/new_post.dart';
 import 'package:navigation_time/features/search/views/search_screen.dart';
+import 'package:navigation_time/features/users/views/profile_screen.dart';
 import 'package:navigation_time/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -84,7 +85,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: const Placeholder(),
+            child: const ProfileScreen(
+              username: "Rafy",
+              tab: "",
+            ),
             // child: const UserProfileScreen(
             //   username: "라피",
             //   tab: "",

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:navigation_time/common/widgets/main_navigation/main_navigation_screen.dart';
+import 'package:navigation_time/features/settings/privacy_screen.dart';
+import 'package:navigation_time/features/settings/settings_screen.dart';
 
 final router = GoRouter(
-  initialLocation: "/search",
+  initialLocation: "/user",
   routes: [
     GoRoute(
       name: MainNavigationScreen.routeName,
@@ -14,9 +16,14 @@ final router = GoRouter(
       },
     ),
     // GoRoute(
-    //   name: ActivityScreen.routeName,
-    //   path: ActivityScreen.routeURL,
-    //   builder: (context, state) => const ActivityScreen(),
+    //   name: SettingsScreen.routeName,
+    //   path: SettingsScreen.routeURL,
+    //   builder: (context, state) => const SettingsScreen(),
+    // ),
+    // GoRoute(
+    //   name: PrivacyScreen.routeName,
+    //   path: PrivacyScreen.routeURL,
+    //   builder: (context, state) => const PrivacyScreen(),
     // ),
     // GoRoute(
     //   name: ChatsScreen.routeName,

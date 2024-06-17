@@ -120,32 +120,3 @@ class PostTimelineScreenState extends ConsumerState<PostTimelineScreen> {
         );
   }
 }
-
-class MakeList extends StatelessWidget {
-  const MakeList({
-    super.key,
-    required ScrollController scrollController,
-    required this.posts,
-  }) : _scrollController = scrollController;
-
-  final ScrollController _scrollController;
-  final List<PostModel> posts;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      // pageSnapping: false,
-      controller: _scrollController,
-      scrollDirection: Axis.vertical,
-      itemCount: posts.length,
-      itemBuilder: (context, index) => Post(
-        userName: posts[index].userName,
-        content: posts[index].content,
-        imgs: posts[index].imgs ?? [],
-      ),
-      separatorBuilder: (context, index) => const Divider(
-        thickness: 0.5,
-      ),
-    );
-  }
-}
