@@ -5,11 +5,11 @@ import 'package:navigation_time/features/settings/privacy_screen.dart';
 import 'package:navigation_time/features/settings/settings_screen.dart';
 
 final router = GoRouter(
-  initialLocation: "/user",
+  initialLocation: "/home",
   routes: [
     GoRoute(
       name: MainNavigationScreen.routeName,
-      path: "/:tab(home|search|post|like|user)",
+      path: "/:tab(home|search|like|user)",
       builder: (context, state) {
         final tab = state.params["tab"]!;
         return MainNavigationScreen(tab: tab);

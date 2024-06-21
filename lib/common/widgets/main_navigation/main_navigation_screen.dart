@@ -74,11 +74,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             child: const SearchScreen(),
           ),
           Offstage(
-            offstage: _selectedIndex != 2,
-            // child: const InboxScreen(),
-            child: const Placeholder(),
-          ),
-          Offstage(
             offstage: _selectedIndex != 3,
             // child: const InboxScreen(),
             child: const ActivityScreen(),

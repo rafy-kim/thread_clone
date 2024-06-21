@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:navigation_time/constants/gaps.dart';
 import 'package:navigation_time/constants/sizes.dart';
+import 'package:navigation_time/features/posts/views/widgets/attach_photo.dart';
 
 class NewPost extends ConsumerStatefulWidget {
   const NewPost({super.key});
@@ -15,6 +17,7 @@ class _NewPostState extends ConsumerState<NewPost> {
   final String userName = "rafy";
   final TextEditingController _postEditingController = TextEditingController();
   String _post = "";
+  File? _selectedPhoto;
 
   @override
   void initState() {
@@ -41,6 +44,27 @@ class _NewPostState extends ConsumerState<NewPost> {
   }
 
   void _onStartWriting() {}
+
+  void _deleteImage() {
+    _stopWriting();
+    setState(() {
+      _selectedPhoto = null;
+    });
+  }
+
+  Future<void> _onAttachTap() async {
+    _stopWriting();
+    final File? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const AttachPhoto(),
+      ),
+    );
+    if (result != null) {
+      setState(() {
+        _selectedPhoto = result;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,102 +111,129 @@ class _NewPostState extends ConsumerState<NewPost> {
               ),
             ),
           ),
-          body: Padding(
+          body: Container(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                IntrinsicHeight(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            child: Text(userName.substring(0, 2)),
-                          ),
-                          Gaps.v10,
-                          Expanded(
-                            child: VerticalDivider(
-                              // width: Sizes.size32,
-                              thickness: Sizes.size3,
-                              color: Colors.grey.shade300,
-                              // indent: Sizes.size14,
-                              // endIndent: Sizes.size14,
-                            ),
-                          ),
-                          Opacity(
-                            opacity: 0.5,
-                            child: CircleAvatar(
-                              radius: 10,
-                              child: Text(
-                                userName.substring(0, 2),
-                                style: const TextStyle(
-                                  fontSize: 8,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Column(
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Gaps.h10,
-                                Text(
-                                  userName,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Gaps.h5,
-                                Icon(
-                                  Icons.check_circle,
-                                  color: Colors.blue[300],
-                                  size: 17,
-                                ),
-                              ],
+                            CircleAvatar(
+                              child: Text(userName.substring(0, 2)),
                             ),
+                            Gaps.v10,
                             Expanded(
-                              child: TextField(
-                                controller: _postEditingController,
-                                onTap: _onStartWriting,
-                                expands: true,
-                                minLines: null,
-                                maxLines: null,
-                                textInputAction: TextInputAction.newline,
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  hintText: "Start a thread...",
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.grey.shade200,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    vertical: Sizes.size10,
-                                    horizontal: Sizes.size10,
+                              child: VerticalDivider(
+                                thickness: Sizes.size3,
+                                color: Colors.grey.shade300,
+                              ),
+                            ),
+                            Opacity(
+                              opacity: 0.5,
+                              child: CircleAvatar(
+                                radius: 10,
+                                child: Text(
+                                  userName.substring(0, 2),
+                                  style: const TextStyle(
+                                    fontSize: 8,
                                   ),
                                 ),
                               ),
                             ),
-                            Gaps.v10,
-                            IconButton(
-                              icon: const FaIcon(FontAwesomeIcons.paperclip),
-                              onPressed: () {},
-                            ),
-                            Gaps.v10,
                           ],
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Gaps.h10,
+                                  Text(
+                                    userName,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Gaps.h5,
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.blue[300],
+                                    size: 17,
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                constraints: BoxConstraints(
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                ),
+                                child: TextField(
+                                  controller: _postEditingController,
+                                  onTap: _onStartWriting,
+                                  maxLines: null,
+                                  textInputAction: TextInputAction.newline,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: InputDecoration(
+                                    hintText: "Start a thread...",
+                                    border: const OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    filled: true,
+                                    fillColor: _post == ""
+                                        ? Colors.grey.shade200
+                                        : Colors.white,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      vertical: Sizes.size10,
+                                      horizontal: Sizes.size10,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Gaps.v10,
+                              _selectedPhoto != null
+                                  ? SizedBox(
+                                      // height: 250,
+                                      child: Stack(
+                                        children: [
+                                          Image.file(
+                                            _selectedPhoto!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: IconButton(
+                                              icon: const FaIcon(
+                                                FontAwesomeIcons.circleXmark,
+                                                color: Colors.white,
+                                              ),
+                                              onPressed: _deleteImage,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : IconButton(
+                                      icon: const FaIcon(
+                                          FontAwesomeIcons.paperclip),
+                                      onPressed: _onAttachTap,
+                                    ),
+                              Gaps.v10,
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
+                  Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -213,9 +264,9 @@ class _NewPostState extends ConsumerState<NewPost> {
                       ],
                     ),
                   ),
-                ),
-                Gaps.v10,
-              ],
+                  Gaps.v10,
+                ],
+              ),
             ),
           ),
         ),
