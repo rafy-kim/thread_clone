@@ -30,7 +30,7 @@ class _AttachAwesomePhotoState extends ConsumerState<AttachAwesomePhoto>
           saveConfig: SaveConfig.photo(),
           onMediaTap: (mediaCapture) {
             // Hande tap on the preview of the last media captured
-            print('Tap on ${mediaCapture.captureRequest.path}');
+            // print('Tap on ${mediaCapture.captureRequest.path}');
           },
           // onMediaTap: (mediaCapture) {
           //   OpenFile.open(mediaCapture.filePath);

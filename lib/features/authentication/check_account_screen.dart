@@ -33,8 +33,8 @@ class _CheckAccountScreenState extends State<CheckAccountScreen> {
   }
 
   void _onSubmitTap() {
-    print(widget.formData);
-    print("제출 완료!");
+    // print(widget.formData);
+    // print("제출 완료!");
     Navigator.push(
       context,
       MaterialPageRoute(

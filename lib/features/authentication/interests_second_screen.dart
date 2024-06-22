@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/features/authentication/widgets/form_button.dart';
-import 'package:thread_clone/features/authentication/widgets/interest_big_button.dart';
 import 'package:thread_clone/features/authentication/widgets/interest_button.dart';
 
 const musics = [
@@ -63,15 +61,15 @@ class InterestsSecondScreen extends StatefulWidget {
 class _InterestsSecondScreenState extends State<InterestsSecondScreen> {
   List<String> userInterests = [];
 
-  void _selectInterest(isSelected, interest) {
-    if (isSelected) {
-      userInterests.add(interest);
-    } else {
-      userInterests.remove(interest);
-    }
-    setState(() {});
-    print(userInterests);
-  }
+  // void _selectInterest(isSelected, interest) {
+  //   if (isSelected) {
+  //     userInterests.add(interest);
+  //   } else {
+  //     userInterests.remove(interest);
+  //   }
+  //   setState(() {});
+  //   print(userInterests);
+  // }
 
   @override
   Widget build(BuildContext context) {

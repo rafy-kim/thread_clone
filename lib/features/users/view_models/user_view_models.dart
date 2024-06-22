@@ -6,7 +6,6 @@ import 'package:thread_clone/features/users/models/user_model.dart';
 class UserViewModels extends AsyncNotifier<UserModel> {
   @override
   FutureOr<UserModel> build() {
-    // TODO: implement build
     throw UnimplementedError();
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/search/view_models/search_users_view_models.dart';
 import 'package:thread_clone/features/users/views/widgets/user_tile.dart';
+import 'package:thread_clone/utils.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -32,7 +33,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      print("Almost reached the bottom");
       for (var i = 0; i < 10; i++) {
         ref.read(searchUsersProvider.notifier).addFaker();
       }
@@ -120,11 +120,16 @@ class _SliverSearchBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final isDark = isDarkMode(context);
     return Container(
       padding: const EdgeInsets.all(15),
-      color: Colors.white,
+      color: isDark ? Colors.black : Colors.white,
       alignment: Alignment.center,
-      child: const CupertinoSearchTextField(),
+      child: CupertinoSearchTextField(
+        style: TextStyle(
+          color: isDark ? Colors.white : Colors.black,
+        ),
+      ),
     );
   }
 

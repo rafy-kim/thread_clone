@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/view_models/replies_view_model.dart';
@@ -11,6 +10,7 @@ import 'package:thread_clone/features/posts/views/widgets/post.dart';
 import 'package:thread_clone/features/settings/settings_screen.dart';
 import 'package:thread_clone/features/users/views/widgets/persistent_tabbar.dart';
 import 'package:thread_clone/features/users/views/widgets/profile_button.dart';
+import 'package:thread_clone/utils.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   final String username;
@@ -68,7 +68,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      print("Almost reached the bottom");
       for (var i = 0; i < 10; i++) {
         if (_tabController.index == 0) {
           ref.read(threadsProvider.notifier).addFaker();
@@ -92,6 +91,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
   Widget build(BuildContext context) {
     final threadPosts = ref.watch(threadsProvider);
     final repliesPosts = ref.watch(repliesProvider);
+    final isDark = isDarkMode(context);
 
     return SafeArea(
       child: DefaultTabController(
@@ -158,14 +158,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5, horizontal: 10),
                                     decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
+                                        color: isDark
+                                            ? Colors.grey.shade800
+                                            : Colors.grey.shade200,
                                         borderRadius: BorderRadius.circular(
                                           20,
                                         )),
                                     child: Text(
                                       "threads.net",
                                       style: TextStyle(
-                                        color: Colors.grey.shade600,
+                                        color: isDark
+                                            ? Colors.grey.shade400
+                                            : Colors.grey.shade600,
                                       ),
                                     ),
                                   ),

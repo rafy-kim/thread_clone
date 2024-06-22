@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 // 백스페이스가 어설프게 동작함
 class OTPInput extends StatefulWidget {
@@ -10,7 +9,7 @@ class OTPInput extends StatefulWidget {
   });
 
   @override
-  _OTPInputState createState() => _OTPInputState();
+  State<OTPInput> createState() => _OTPInputState();
 }
 
 class _OTPInputState extends State<OTPInput> {

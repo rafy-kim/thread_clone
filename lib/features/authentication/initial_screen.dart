@@ -18,12 +18,9 @@ class InitialScreen extends StatelessWidget {
         ),
       );
     }
-    print("Hello $service");
   }
 
-  void _onTapLogin(BuildContext context) {
-    print("Login Screen으로 고고");
-  }
+  void _onTapLogin(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {

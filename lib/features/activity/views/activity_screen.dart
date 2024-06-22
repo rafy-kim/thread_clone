@@ -1,16 +1,13 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/activity/models/activity_model.dart';
 import 'package:thread_clone/features/activity/view_models/activity_view_models.dart';
 import 'package:thread_clone/features/activity/views/widgets/activity_tile.dart';
 import 'package:thread_clone/features/search/view_models/search_users_view_models.dart';
-import 'package:thread_clone/features/users/views/widgets/user_tile.dart';
+import 'package:thread_clone/utils.dart';
 
 final tabs = [
   "All",
@@ -46,7 +43,6 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      print("Almost reached the bottom");
       for (var i = 0; i < 10; i++) {
         ref.read(searchUsersProvider.notifier).addFaker();
       }
@@ -73,6 +69,7 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return ref.watch(activitiesProvider).when(
           loading: () => const Center(
             child: CircularProgressIndicator(),
@@ -102,17 +99,17 @@ class _ActivityScreenState extends ConsumerState<ActivityScreen> {
                       fontWeight: FontWeight.w800,
                     ),
                   ), //,
-                  backgroundColor: Colors.white,
+                  // backgroundColor: Colors.white,
                   elevation: 0,
                   bottom: TabBar(
                     tabAlignment: TabAlignment.start,
                     isScrollable: true,
-                    dividerColor: Colors.white,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black,
+                    dividerColor: isDark ? Colors.black : Colors.white,
+                    labelColor: isDark ? Colors.black : Colors.white,
+                    unselectedLabelColor: isDark ? Colors.white : Colors.black,
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black,
                     ),
                     padding: const EdgeInsets.only(
                       left: 10,
@@ -250,75 +247,3 @@ Widget _buildTab(String text) {
     ),
   );
 }
-
-class _SliverSearchBarDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      color: Colors.white,
-      alignment: Alignment.center,
-      child: const CupertinoSearchTextField(),
-    );
-  }
-
-  @override
-  double get maxExtent => 80.0;
-
-  @override
-  double get minExtent => 80.0;
-
-  @override
-  bool shouldRebuild(_SliverSearchBarDelegate oldDelegate) {
-    return false;
-  }
-}
-
-
-// SafeArea(
-//               child: CustomScrollView(
-//                 controller: _scrollController,
-//                 slivers: [
-//                   SliverAppBar(
-//                     // pinned: true,
-//                     collapsedHeight: 60,
-//                     expandedHeight: 80,
-//                     flexibleSpace: FlexibleSpaceBar(
-//                       // title: const Text("Search"),
-//                       background: Container(
-//                         alignment: Alignment.bottomLeft,
-//                         padding: const EdgeInsets.only(top: 20, left: 20),
-//                         child: const Text(
-//                           "Search",
-//                           style: TextStyle(
-//                             fontSize: Sizes.size32,
-//                             fontWeight: FontWeight.w800,
-//                           ),
-//                         ), // 상단에만 고정될 텍스트
-//                       ),
-//                     ),
-//                   ),
-//                   SliverPersistentHeader(
-//                     delegate: _SliverSearchBarDelegate(),
-//                     // pinned: true, // CupertinoSearchTextField 고정
-//                     floating: true,
-//                   ),
-//                   SliverList.separated(
-//                     itemCount: activities.length,
-//                     itemBuilder: (context, index) => ActivityTile(
-//                       userImg: activities[index].userImg,
-//                       username: activities[index].userName,
-//                       timeAgo: "${activities[index].time}h",
-//                       actionType: activities[index].actionType,
-//                       actionDescription: activities[index].actionDescription!,
-//                       hasTrailingWidget: activities[index]
-//                           .followButton!, // 트레일링 위젯이 필요 없는 경우 null
-//                     ),
-//                     separatorBuilder: (context, index) => const Divider(
-//                       thickness: 0.5,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),

@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/views/widgets/modal_sheet.dart';
-import 'package:thread_clone/features/posts/views/widgets/post_more.dart';
 
 class Post extends StatelessWidget {
   final String userName;
@@ -129,10 +128,13 @@ class Post extends StatelessWidget {
                         ),
                       ),
 
-                      const Text(
-                        "2m",
-                        style: TextStyle(
-                          color: Colors.grey,
+                      const Opacity(
+                        opacity: 0.6,
+                        child: Text(
+                          "2m",
+                          style: TextStyle(
+                              // color: Colors.grey,
+                              ),
                         ),
                       ),
                       Gaps.h10,
@@ -142,10 +144,13 @@ class Post extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    content,
-                    style: TextStyle(
-                      color: Colors.grey.shade800,
+                  Opacity(
+                    opacity: 0.7,
+                    child: Text(
+                      content,
+                      style: const TextStyle(
+                          // color: Colors.grey.shade800,
+                          ),
                     ),
                   ),
 

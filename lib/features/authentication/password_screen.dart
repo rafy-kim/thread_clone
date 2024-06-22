@@ -13,10 +13,9 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
-  final bool _isValid = false;
-  void _onTapCancel(BuildContext context) {
-    Navigator.of(context).pop();
-  }
+  // void _onTapCancel(BuildContext context) {
+  //   Navigator.of(context).pop();
+  // }
 
   final TextEditingController _passwordController = TextEditingController();
 
@@ -58,9 +57,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
     );
   }
 
-  void _onClearTap() {
-    _passwordController.clear();
-  }
+  // void _onClearTap() {
+  //   _passwordController.clear();
+  // }
 
   void _toogleObscureText() {
     _obscureText = !_obscureText;

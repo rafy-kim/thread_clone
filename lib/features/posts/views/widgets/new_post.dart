@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/views/widgets/attach_photo.dart';
+import 'package:thread_clone/utils.dart';
 
 class NewPost extends ConsumerStatefulWidget {
   const NewPost({super.key});
@@ -188,8 +189,12 @@ class _NewPostState extends ConsumerState<NewPost> {
                                     ),
                                     filled: true,
                                     fillColor: _post == ""
-                                        ? Colors.grey.shade200
-                                        : Colors.white,
+                                        ? (isDarkMode(context)
+                                            ? Colors.grey.shade900
+                                            : Colors.grey.shade100)
+                                        : (isDarkMode(context)
+                                            ? Colors.black
+                                            : Colors.white),
                                     contentPadding: const EdgeInsets.symmetric(
                                       vertical: Sizes.size10,
                                       horizontal: Sizes.size10,

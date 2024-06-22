@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/utils.dart';
 
 class PersistentTabbar extends SliverPersistentHeaderDelegate {
   final TabController tabController;
@@ -11,18 +11,18 @@ class PersistentTabbar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // final isDark = isDarkMode(context);
+    final isDark = isDarkMode(context);
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: isDark ? Colors.black : Colors.white,
       ),
       child: TabBar(
         controller: tabController,
         splashFactory: NoSplash.splashFactory,
-        indicatorColor: Colors.black,
+        indicatorColor: isDark ? Colors.white : Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         dividerHeight: 0.5,
-        labelColor: Colors.black,
+        labelColor: isDark ? Colors.white : Colors.black,
         unselectedLabelColor: Colors.grey,
         labelPadding: const EdgeInsets.symmetric(
           vertical: Sizes.size10,

@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/features/authentication/interests_second_screen.dart';
 import 'package:thread_clone/features/authentication/widgets/form_button.dart';
 import 'package:thread_clone/features/authentication/widgets/interest_big_button.dart';
-import 'package:thread_clone/features/authentication/widgets/interest_button.dart';
 
 const interests = [
   "Fashion & beauty",

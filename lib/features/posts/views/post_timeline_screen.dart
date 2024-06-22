@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:thread_clone/constants/gaps.dart';
-import 'package:thread_clone/constants/sizes.dart';
-import 'package:thread_clone/features/posts/models/post_model.dart';
 import 'package:thread_clone/features/posts/view_models/timeline_view_model.dart';
 import 'package:thread_clone/features/posts/views/widgets/post.dart';
 
@@ -34,7 +31,6 @@ class PostTimelineScreenState extends ConsumerState<PostTimelineScreen> {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 200) {
       // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      print("Almost reached the bottom");
       for (var i = 0; i < 10; i++) {
         ref.read(timelineProvider.notifier).addFaker();
       }
@@ -73,7 +69,7 @@ class PostTimelineScreenState extends ConsumerState<PostTimelineScreen> {
                   // snap: true,
                   floating: true,
                   stretch: true,
-                  backgroundColor: Colors.white,
+                  // backgroundColor: Colors.white,
                   // elevation: 1,
                   collapsedHeight: 80,
                   expandedHeight: 120,

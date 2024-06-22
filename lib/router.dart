@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thread_clone/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:thread_clone/features/authentication/initial_screen.dart';
-import 'package:thread_clone/features/settings/privacy_screen.dart';
-import 'package:thread_clone/features/settings/settings_screen.dart';
 
 final routerProvider = Provider(
   (ref) {
