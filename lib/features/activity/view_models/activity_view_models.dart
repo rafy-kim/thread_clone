@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/features/activity/models/activity_model.dart';
-import 'package:navigation_time/features/users/models/user_model.dart';
+import 'package:thread_clone/features/activity/models/activity_model.dart';
+import 'package:thread_clone/features/users/models/user_model.dart';
 
 List<String> images = [
   "https://i.namu.wiki/i/ieNO5Cow2iXxPzlKaW1DgzQ1WXsJCFtoz6axDlWH39NYFPwY78M8vsEqZUpSfglnE4ssQu_obfSisbMsjjahsw.webp",

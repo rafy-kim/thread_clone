@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/search/view_models/search_users_view_models.dart';
-import 'package:navigation_time/features/users/views/widgets/user_tile.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/search/view_models/search_users_view_models.dart';
+import 'package:thread_clone/features/users/views/widgets/user_tile.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});

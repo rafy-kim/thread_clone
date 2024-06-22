@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/posts/models/post_model.dart';
-import 'package:navigation_time/features/posts/view_models/timeline_view_model.dart';
-import 'package:navigation_time/features/posts/views/widgets/post.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/posts/models/post_model.dart';
+import 'package:thread_clone/features/posts/view_models/timeline_view_model.dart';
+import 'package:thread_clone/features/posts/views/widgets/post.dart';
 
 class PostTimelineScreen extends ConsumerStatefulWidget {
   const PostTimelineScreen({super.key});

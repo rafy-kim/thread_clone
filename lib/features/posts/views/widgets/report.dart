@@ -2,8 +2,8 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
 
 class Report extends ConsumerWidget {
   final Function selectIndex;

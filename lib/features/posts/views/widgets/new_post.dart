@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/posts/views/widgets/attach_photo.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/posts/views/widgets/attach_photo.dart';
 
 class NewPost extends ConsumerStatefulWidget {
   const NewPost({super.key});

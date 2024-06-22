@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
 
 class PostMore extends ConsumerStatefulWidget {
   const PostMore({required this.selectIndex, super.key});

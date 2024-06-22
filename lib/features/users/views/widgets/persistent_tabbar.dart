@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:navigation_time/constants/sizes.dart';
+import 'package:thread_clone/constants/sizes.dart';
 
 class PersistentTabbar extends SliverPersistentHeaderDelegate {
   final TabController tabController;

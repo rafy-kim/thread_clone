@@ -1,6 +1,6 @@
 {
-    "name": "navigation_time",
-    "short_name": "navigation_time",
+    "name": "thread_clone",
+    "short_name": "thread_clone",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

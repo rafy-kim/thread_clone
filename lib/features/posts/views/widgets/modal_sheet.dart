@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_time/features/posts/views/widgets/post_more.dart';
-import 'package:navigation_time/features/posts/views/widgets/report.dart';
+import 'package:thread_clone/features/posts/views/widgets/post_more.dart';
+import 'package:thread_clone/features/posts/views/widgets/report.dart';
 
 class ModalSheet extends StatefulWidget {
   const ModalSheet({super.key});

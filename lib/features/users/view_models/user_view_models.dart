@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/features/users/models/user_model.dart';
+import 'package:thread_clone/features/users/models/user_model.dart';
 
 class UserViewModels extends AsyncNotifier<UserModel> {
   @override

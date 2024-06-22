@@ -4,13 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/activity/models/activity_model.dart';
-import 'package:navigation_time/features/activity/view_models/activity_view_models.dart';
-import 'package:navigation_time/features/activity/views/widgets/activity_tile.dart';
-import 'package:navigation_time/features/search/view_models/search_users_view_models.dart';
-import 'package:navigation_time/features/users/views/widgets/user_tile.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/activity/models/activity_model.dart';
+import 'package:thread_clone/features/activity/view_models/activity_view_models.dart';
+import 'package:thread_clone/features/activity/views/widgets/activity_tile.dart';
+import 'package:thread_clone/features/search/view_models/search_users_view_models.dart';
+import 'package:thread_clone/features/users/views/widgets/user_tile.dart';
 
 final tabs = [
   "All",

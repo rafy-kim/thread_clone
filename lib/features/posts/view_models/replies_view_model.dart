@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:navigation_time/features/posts/models/post_model.dart';
+import 'package:thread_clone/features/posts/models/post_model.dart';
 
 List<String> images = [
   "https://mblogthumb-phinf.pstatic.net/MjAyMDA4MjFfNTcg/MDAxNTk3OTg0MTMyNjQw.wmPK-tavZSE9XS0EDp4KhoKPSTDrvqQjfqZV80oXzrkg.Y27ffGjvzhAaIImJWbCeBrUmJ8mScapI8DJzejuPmuAg.JPEG.dlwnsgur34/1.jpg?type=w800",

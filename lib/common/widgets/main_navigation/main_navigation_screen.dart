@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:navigation_time/common/widgets/main_navigation/widgets/nav_tab.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/activity/views/activity_screen.dart';
-import 'package:navigation_time/features/posts/views/post_timeline_screen.dart';
-import 'package:navigation_time/features/posts/views/widgets/modal_sheet.dart';
-import 'package:navigation_time/features/posts/views/widgets/new_post.dart';
-import 'package:navigation_time/features/search/views/search_screen.dart';
-import 'package:navigation_time/features/users/views/profile_screen.dart';
-import 'package:navigation_time/utils.dart';
+import 'package:thread_clone/common/widgets/main_navigation/widgets/nav_tab.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/activity/views/activity_screen.dart';
+import 'package:thread_clone/features/posts/views/post_timeline_screen.dart';
+import 'package:thread_clone/features/posts/views/widgets/modal_sheet.dart';
+import 'package:thread_clone/features/posts/views/widgets/new_post.dart';
+import 'package:thread_clone/features/search/views/search_screen.dart';
+import 'package:thread_clone/features/users/views/profile_screen.dart';
+import 'package:thread_clone/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   static const String routeName = "mainNavigation";

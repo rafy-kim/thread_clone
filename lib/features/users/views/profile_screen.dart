@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:navigation_time/constants/gaps.dart';
-import 'package:navigation_time/constants/sizes.dart';
-import 'package:navigation_time/features/posts/view_models/replies_view_model.dart';
-import 'package:navigation_time/features/posts/view_models/threads_view_model.dart';
-import 'package:navigation_time/features/posts/view_models/timeline_view_model.dart';
-import 'package:navigation_time/features/posts/views/widgets/post.dart';
-import 'package:navigation_time/features/settings/settings_screen.dart';
-import 'package:navigation_time/features/users/views/widgets/persistent_tabbar.dart';
-import 'package:navigation_time/features/users/views/widgets/profile_button.dart';
+import 'package:thread_clone/constants/gaps.dart';
+import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/posts/view_models/replies_view_model.dart';
+import 'package:thread_clone/features/posts/view_models/threads_view_model.dart';
+import 'package:thread_clone/features/posts/view_models/timeline_view_model.dart';
+import 'package:thread_clone/features/posts/views/widgets/post.dart';
+import 'package:thread_clone/features/settings/settings_screen.dart';
+import 'package:thread_clone/features/users/views/widgets/persistent_tabbar.dart';
+import 'package:thread_clone/features/users/views/widgets/profile_button.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   final String username;
