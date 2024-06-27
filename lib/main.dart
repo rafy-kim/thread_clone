@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thread_clone/features/settings/repos/screen_config_repository.dart';
+import 'package:thread_clone/features/settings/view_models/screen_config_view_model.dart';
 import 'package:thread_clone/router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final preferences = await SharedPreferences.getInstance();
+  final repository = ScreenConfigRepository(preferences);
+
   runApp(
-    const ProviderScope(
-      child: ThreadClone(),
+    ProviderScope(
+      overrides: [
+        screenConfigProvider
+            .overrideWith(() => ScreenConfigViewModel(repository))
+      ],
+      child: const ThreadClone(),
     ),
   );
 }
@@ -20,7 +32,9 @@ class ThreadClone extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: ref.watch(routerProvider),
       title: 'Thread Clone',
-      themeMode: ThemeMode.system,
+      themeMode: ref.watch(screenConfigProvider).dark
+          ? ThemeMode.dark
+          : ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light, // 디폴트 글자 색상

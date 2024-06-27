@@ -2,11 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thread_clone/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:thread_clone/features/authentication/initial_screen.dart';
+import 'package:thread_clone/features/settings/views/privacy_screen.dart';
+import 'package:thread_clone/features/settings/views/settings_screen.dart';
 
 final routerProvider = Provider(
   (ref) {
     return GoRouter(
-      initialLocation: "/home",
+      initialLocation: "/",
       // redirect: (context, state) {
       //   final isLoggedIn = ref.read(authRepo).isLoggedIn;
       //   if (!isLoggedIn) {
@@ -18,19 +20,31 @@ final routerProvider = Provider(
       //   return null;
       // },
       routes: [
-        GoRoute(
-          name: InitialScreen.routeName,
-          path: InitialScreen.routeURL,
-          builder: (context, state) => const InitialScreen(),
-        ),
+        // GoRoute(
+        //   name: InitialScreen.routeName,
+        //   path: InitialScreen.routeURL,
+        //   builder: (context, state) => const InitialScreen(),
+        // ),
+
         GoRoute(
           name: MainNavigationScreen.routeName,
-          path: "/:tab(home|search|like|user)",
+          path: "/:tab(|search|activity|profile)",
           builder: (context, state) {
             final tab = state.params["tab"]!;
             return MainNavigationScreen(tab: tab);
           },
         ),
+        GoRoute(
+            name: SettingsScreen.routeName,
+            path: SettingsScreen.routeURL,
+            builder: (context, state) => const SettingsScreen(),
+            routes: [
+              GoRoute(
+                name: PrivacyScreen.routeName,
+                path: PrivacyScreen.routeURL,
+                builder: (context, state) => const PrivacyScreen(),
+              ),
+            ]),
         // GoRoute(
         //   name: SettingsScreen.routeName,
         //   path: SettingsScreen.routeURL,

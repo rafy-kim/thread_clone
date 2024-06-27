@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thread_clone/constants/gaps.dart';
-import 'package:thread_clone/features/settings/privacy_screen.dart';
+import 'package:thread_clone/features/settings/view_models/screen_config_view_model.dart';
+import 'package:thread_clone/features/settings/views/privacy_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
   static const String routeName = "settings";
@@ -12,12 +13,13 @@ class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   void _onPrivacyPressed(BuildContext context) {
-    // context.go(PrivacyScreen.routeURL);
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const PrivacyScreen(),
-      ),
-    );
+    // context.push(PrivacyScreen.routeURL);
+    context.pushNamed(PrivacyScreen.routeName);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const PrivacyScreen(),
+    //   ),
+    // );
   }
 
   @override
@@ -60,6 +62,13 @@ class SettingsScreen extends ConsumerWidget {
         ),
         body: ListView(
           children: [
+            SwitchListTile.adaptive(
+              value: ref.watch(screenConfigProvider).dark,
+              onChanged: (value) =>
+                  ref.read(screenConfigProvider.notifier).setDark(value),
+              title: const Text("Dark Mode"),
+              subtitle: const Text("다크모드 최고"),
+            ),
             const ListTile(
               leading: FaIcon(
                 FontAwesomeIcons.userPlus,

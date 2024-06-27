@@ -21,11 +21,11 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<String> _tabs = [
-    "home",
+    "",
     "search",
     "post",
-    "like",
-    "user",
+    "activity",
+    "profile",
   ];
 
   late int _selectedIndex = _tabs.indexOf(widget.tab);

@@ -6,7 +6,7 @@ import 'package:thread_clone/constants/gaps.dart';
 
 class PrivacyScreen extends ConsumerStatefulWidget {
   static const String routeName = "privacy";
-  static const String routeURL = "/privacy";
+  static const String routeURL = "privacy";
   const PrivacyScreen({super.key});
 
   @override

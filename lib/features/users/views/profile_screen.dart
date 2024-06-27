@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/view_models/replies_view_model.dart';
 import 'package:thread_clone/features/posts/view_models/threads_view_model.dart';
 import 'package:thread_clone/features/posts/view_models/timeline_view_model.dart';
 import 'package:thread_clone/features/posts/views/widgets/post.dart';
-import 'package:thread_clone/features/settings/settings_screen.dart';
+import 'package:thread_clone/features/settings/views/settings_screen.dart';
 import 'package:thread_clone/features/users/views/widgets/persistent_tabbar.dart';
 import 'package:thread_clone/features/users/views/widgets/profile_button.dart';
 import 'package:thread_clone/utils.dart';
@@ -79,12 +80,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
   }
 
   void _onBarsPressed() {
-    // context.go(SettingsScreen.routeURL);
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const SettingsScreen(),
-      ),
-    );
+    context.push(SettingsScreen.routeURL);
+    // context.pushNamed(SettingsScreen.routeName);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const SettingsScreen(),
+    //   ),
+    // );
   }
 
   @override
