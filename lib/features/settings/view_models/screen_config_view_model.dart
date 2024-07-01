@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thread_clone/features/settings/models/screen_config_model.dart';
 import 'package:thread_clone/features/settings/repos/screen_config_repository.dart';

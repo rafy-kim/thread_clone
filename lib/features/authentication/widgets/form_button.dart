@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/utils.dart';
 
 class FormButton extends StatelessWidget {
   const FormButton({
     super.key,
     required this.disabled,
     this.text,
-    required this.isLarge,
-    this.color,
   });
 
   final bool disabled;
-  final bool isLarge;
   final String? text;
-  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: isLarge ? 300 : 100,
+    return FractionallySizedBox(
+      widthFactor: 1,
       child: AnimatedContainer(
         padding: const EdgeInsets.symmetric(
           vertical: Sizes.size16,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Sizes.size24),
-          color: disabled ? const Color(0xff88898c) : color ?? Colors.black,
+          borderRadius: BorderRadius.circular(Sizes.size5),
+          color: disabled
+              ? isDarkMode(context)
+                  ? Colors.grey.shade800
+                  : Colors.grey.shade300
+              : Theme.of(context).primaryColor,
         ),
         duration: const Duration(
           milliseconds: 500,
@@ -37,7 +38,7 @@ class FormButton extends StatelessWidget {
             // seconds: 5,
           ),
           style: TextStyle(
-            color: disabled ? const Color(0xffC1C3C6) : Colors.white,
+            color: disabled ? Colors.grey.shade400 : Colors.white,
             fontWeight: FontWeight.w600,
           ),
           child: Text(

@@ -1,13 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thread_clone/features/settings/repos/screen_config_repository.dart';
 import 'package:thread_clone/features/settings/view_models/screen_config_view_model.dart';
+import 'package:thread_clone/firebase_options.dart';
 import 'package:thread_clone/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase Initialize
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   final preferences = await SharedPreferences.getInstance();
   final repository = ScreenConfigRepository(preferences);
@@ -57,7 +64,7 @@ class ThreadClone extends ConsumerWidget {
             color: Colors.grey.shade400,
           ),
         ),
-        primaryColor: Colors.blue[400],
+        primaryColor: const Color(0xff0C64E0),
         textTheme: TextTheme(
           displayLarge: GoogleFonts.openSans(
               fontSize: 96, fontWeight: FontWeight.w300, letterSpacing: -1.5),
