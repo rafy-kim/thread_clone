@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/posts/views/widgets/images_slider.dart';
 import 'package:thread_clone/features/posts/views/widgets/modal_sheet.dart';
 
 class Post extends StatelessWidget {
@@ -156,30 +157,7 @@ class Post extends StatelessWidget {
 
                   Gaps.v10,
                   // Post image
-                  if (imgs.isNotEmpty)
-                    SizedBox(
-                      height: 250,
-                      child: PageView.builder(
-                        controller: imgs.length > 1
-                            ? PageController(viewportFraction: 0.9)
-                            : null,
-                        itemCount: imgs.length,
-                        padEnds: false,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.network(
-                              imgs[index],
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                  if (imgs.isNotEmpty) ImagesSlider(imgs: imgs),
                   Gaps.v10,
                   // Action buttons
                   Row(

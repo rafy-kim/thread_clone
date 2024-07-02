@@ -12,7 +12,7 @@ class PostRepository {
   // upload a image file
   UploadTask uploadImageFile(File image, String uid) {
     final fileRef = _storage.ref().child(
-          "/images/$uid/${DateTime.now().millisecondsSinceEpoch.toString()}",
+          "/images/$uid/${DateTime.now().microsecondsSinceEpoch.toString()}",
         );
     return fileRef.putFile(image);
   }
@@ -31,7 +31,23 @@ class PostRepository {
     if (lastItemCreatedAt == null) {
       return query.get();
     } else {
-      print(lastItemCreatedAt);
+      return query.startAfter([lastItemCreatedAt]).get();
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchUserPosts({
+    int? lastItemCreatedAt,
+    required String uid,
+  }) {
+    final query = _db
+        .collection("users")
+        .doc(uid)
+        .collection("posts")
+        .orderBy("createdAt", descending: true)
+        .limit(3);
+    if (lastItemCreatedAt == null) {
+      return query.get();
+    } else {
       return query.startAfter([lastItemCreatedAt]).get();
     }
   }

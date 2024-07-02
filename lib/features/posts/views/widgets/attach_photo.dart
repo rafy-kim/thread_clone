@@ -143,10 +143,12 @@ class _AttachPhotoState extends ConsumerState<AttachPhoto>
     Navigator.of(context).pop(File(photo.path));
   }
 
-  Future<void> _onPickVideoPressed() async {
-    final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (photo == null || !mounted) return;
-    Navigator.of(context).pop(File(photo.path));
+  Future<void> _onPickImagePressed() async {
+    // final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final photos = await ImagePicker().pickMultiImage();
+    if (!mounted) return;
+    // Navigator.of(context).pop(File(photo.path));
+    Navigator.of(context).pop(photos);
   }
 
   @override
@@ -272,7 +274,7 @@ class _AttachPhotoState extends ConsumerState<AttachPhoto>
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: _onPickVideoPressed,
+                            onTap: _onPickImagePressed,
                             child: Container(
                               alignment: Alignment.topCenter,
                               child: Text(

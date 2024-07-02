@@ -2,10 +2,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/view_models/post_view_model.dart';
 import 'package:thread_clone/features/posts/views/widgets/attach_photo.dart';
+import 'package:thread_clone/features/posts/views/widgets/image_files_slider.dart';
 import 'package:thread_clone/utils.dart';
 
 class NewPost extends ConsumerStatefulWidget {
@@ -19,7 +21,7 @@ class _NewPostState extends ConsumerState<NewPost> {
   final String userName = "rafy";
   final TextEditingController _postEditingController = TextEditingController();
   String _post = "";
-  File? _selectedPhoto;
+  List<File>? _selectedPhotos;
 
   @override
   void initState() {
@@ -50,26 +52,31 @@ class _NewPostState extends ConsumerState<NewPost> {
   void _deleteImage() {
     _stopWriting();
     setState(() {
-      _selectedPhoto = null;
+      _selectedPhotos = null;
     });
   }
 
   void _onTapPost() {
+    // TODO: selectedPhoto -> selectedPhotos 복수 이미지 업로드로 변경 필요
     ref
         .read(postProvider.notifier)
-        .savePost(post: _post, image: _selectedPhoto, context: context);
+        .savePost(post: _post, images: _selectedPhotos, context: context);
   }
 
   Future<void> _onAttachTap() async {
     _stopWriting();
-    final File? result = await Navigator.of(context).push(
+    final List<XFile>? images = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const AttachPhoto(),
       ),
     );
-    if (result != null) {
+    if (images != null) {
       setState(() {
-        _selectedPhoto = result;
+        _selectedPhotos = images
+            .map(
+              (photo) => File(photo.path),
+            )
+            .toList();
       });
     }
   }
@@ -210,29 +217,8 @@ class _NewPostState extends ConsumerState<NewPost> {
                                 ),
                               ),
                               Gaps.v10,
-                              _selectedPhoto != null
-                                  ? SizedBox(
-                                      // height: 250,
-                                      child: Stack(
-                                        children: [
-                                          Image.file(
-                                            _selectedPhoto!,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          Positioned(
-                                            top: 10,
-                                            right: 10,
-                                            child: IconButton(
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons.circleXmark,
-                                                color: Colors.white,
-                                              ),
-                                              onPressed: _deleteImage,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                              _selectedPhotos != null
+                                  ? ImageFilesSlider(imgs: _selectedPhotos!)
                                   : IconButton(
                                       icon: const FaIcon(
                                           FontAwesomeIcons.paperclip),

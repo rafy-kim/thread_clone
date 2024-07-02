@@ -23,7 +23,7 @@ class PostModel {
         content = json["content"],
         userId = json["userId"],
         createdAt = json["createdAt"],
-        id = json["id"],
+        id = json["id"] ?? "",
         imgs = (json['imgs'] as List<dynamic>).map((e) => e as String).toList();
 
   Map<String, dynamic> toJson() {

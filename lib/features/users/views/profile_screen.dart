@@ -6,7 +6,6 @@ import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/posts/view_models/replies_view_model.dart';
 import 'package:thread_clone/features/posts/view_models/threads_view_model.dart';
-import 'package:thread_clone/features/posts/view_models/timeline_view_model.dart';
 import 'package:thread_clone/features/posts/views/widgets/post.dart';
 import 'package:thread_clone/features/settings/views/settings_screen.dart';
 import 'package:thread_clone/features/users/views/widgets/persistent_tabbar.dart';
@@ -64,13 +63,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
   // }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
-      // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      for (var i = 0; i < 10; i++) {
-        if (_tabController.index == 0) {
-          ref.read(threadsProvider.notifier).addFaker();
-        } else {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      // 스크롤이 맨 아래에 도달했을 때
+      if (_tabController.index == 0) {
+        ref.read(threadsProvider.notifier).fetchNextPage();
+      } else {
+        for (var i = 0; i < 10; i++) {
           ref.read(repliesProvider.notifier).addFaker();
         }
       }

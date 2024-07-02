@@ -39,7 +39,6 @@ class SearchUsersViewModels extends AsyncNotifier<List<UserProfileModel>> {
   void addFaker() async {
     state = const AsyncValue.loading();
     // await Future.delayed(const Duration(seconds: 1));
-    List<String> randomImgs = getRandomElements(images, 1, 1);
 
     final faker = Faker();
     final newPost = UserProfileModel(
