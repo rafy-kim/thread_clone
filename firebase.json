@@ -1,1 +1,47 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"thread-clone-raom","appId":"1:1078060694051:android:2344365ff463ac061bcf96","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"thread-clone-raom","appId":"1:1078060694051:ios:58ecc4c4c09e388a1bcf96","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"thread-clone-raom","configurations":{"android":"1:1078060694051:android:2344365ff463ac061bcf96","ios":"1:1078060694051:ios:58ecc4c4c09e388a1bcf96","web":"1:1078060694051:web:e53a8c636258d9bf1bcf96"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "thread-clone-raom",
+          "appId": "1:1078060694051:android:2344365ff463ac061bcf96",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "thread-clone-raom",
+          "appId": "1:1078060694051:ios:58ecc4c4c09e388a1bcf96",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "thread-clone-raom",
+          "configurations": {
+            "android": "1:1078060694051:android:2344365ff463ac061bcf96",
+            "ios": "1:1078060694051:ios:58ecc4c4c09e388a1bcf96",
+            "web": "1:1078060694051:web:e53a8c636258d9bf1bcf96"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}

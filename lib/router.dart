@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thread_clone/common/widgets/main_navigation/main_navigation_screen.dart';
+import 'package:thread_clone/features/authentication/repos/authentication_repository.dart';
 import 'package:thread_clone/features/authentication/views/login_screen.dart';
 import 'package:thread_clone/features/authentication/views/signup_screen.dart';
 import 'package:thread_clone/features/settings/views/privacy_screen.dart';
@@ -9,17 +10,17 @@ import 'package:thread_clone/features/settings/views/settings_screen.dart';
 final routerProvider = Provider(
   (ref) {
     return GoRouter(
-      initialLocation: "/login",
-      // redirect: (context, state) {
-      //   final isLoggedIn = ref.read(authRepo).isLoggedIn;
-      //   if (!isLoggedIn) {
-      //     if (state.subloc != SignUpScreen.routeURL &&
-      //         state.subloc != LoginScreen.routeURL) {
-      //       return SignUpScreen.routeURL;
-      //     }
-      //   }
-      //   return null;
-      // },
+      initialLocation: "/",
+      redirect: (context, state) {
+        final isLoggedIn = ref.read(authRepo).isLoggedIn;
+        if (!isLoggedIn) {
+          if (state.subloc != SignupScreen.routeURL &&
+              state.subloc != LoginScreen.routeURL) {
+            return LoginScreen.routeURL;
+          }
+        }
+        return null;
+      },
       routes: [
         GoRoute(
           name: LoginScreen.routeName,

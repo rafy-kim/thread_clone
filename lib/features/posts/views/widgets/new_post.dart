@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:thread_clone/constants/gaps.dart';
 import 'package:thread_clone/constants/sizes.dart';
+import 'package:thread_clone/features/posts/view_models/post_view_model.dart';
 import 'package:thread_clone/features/posts/views/widgets/attach_photo.dart';
 import 'package:thread_clone/utils.dart';
 
@@ -51,6 +52,12 @@ class _NewPostState extends ConsumerState<NewPost> {
     setState(() {
       _selectedPhoto = null;
     });
+  }
+
+  void _onTapPost() {
+    ref
+        .read(postProvider.notifier)
+        .savePost(post: _post, image: _selectedPhoto, context: context);
   }
 
   Future<void> _onAttachTap() async {
@@ -252,18 +259,22 @@ class _NewPostState extends ConsumerState<NewPost> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: ref.watch(postProvider).isLoading
+                              ? () {}
+                              : _onTapPost,
                           child: AnimatedOpacity(
                             duration: const Duration(milliseconds: 300),
                             opacity: _post != "" ? 1.0 : 0.4,
-                            child: const Text(
-                              "Post",
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.blue,
-                              ),
-                            ),
+                            child: ref.watch(postProvider).isLoading
+                                ? const CircularProgressIndicator()
+                                : const Text(
+                                    "Post",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
                           ),
                         ),
                       ],

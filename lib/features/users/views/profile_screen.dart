@@ -41,9 +41,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
     Future.delayed(
       Duration.zero,
       () {
-        for (var i = 0; i < 10; i++) {
-          ref.read(timelineProvider.notifier).addFaker();
-        }
+        // ref.read(timelineProvider.notifier).fetchNextPage();
       },
     );
   }

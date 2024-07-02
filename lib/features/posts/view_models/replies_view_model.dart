@@ -46,6 +46,11 @@ class RepliesViewModel extends AsyncNotifier<List<PostModel>> {
       userName: faker.person.name(),
       content: faker.lorem.sentence(),
       imgs: randomImgs,
+      id: faker.randomGenerator
+          .fromCharSet("ABCDEFGHIJKLMONPQESTUVWXYZ!?@#%", 16),
+      userId: faker.randomGenerator
+          .fromCharSet("ABCDEFGHIJKLMONPQESTUVWXYZ!?@#%", 16),
+      createdAt: faker.date.dateTime().millisecondsSinceEpoch,
     );
     _list = [..._list, newPost];
     state = AsyncValue.data(_list);

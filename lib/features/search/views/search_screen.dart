@@ -96,9 +96,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   SliverList.separated(
                     itemCount: users.length,
                     itemBuilder: (context, index) => UserTile(
-                      userName: users[index].userName,
+                      userName: users[index].name,
                       bio: users[index].bio,
-                      userImg: users[index].userImg,
+                      userImg: "",
                       authorized: users[index].authorized,
                       followers: users[index].followers,
                     ),

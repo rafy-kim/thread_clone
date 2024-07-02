@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thread_clone/features/users/models/user_model.dart';
+import 'package:thread_clone/features/users/models/user_profile_model.dart';
 
 List<String> images = [
   "https://i.namu.wiki/i/ieNO5Cow2iXxPzlKaW1DgzQ1WXsJCFtoz6axDlWH39NYFPwY78M8vsEqZUpSfglnE4ssQu_obfSisbMsjjahsw.webp",
@@ -33,8 +33,8 @@ List<T> getRandomElements<T>(List<T> list, int min, int max) {
   return result;
 }
 
-class SearchUsersViewModels extends AsyncNotifier<List<UserModel>> {
-  List<UserModel> _list = [];
+class SearchUsersViewModels extends AsyncNotifier<List<UserProfileModel>> {
+  List<UserProfileModel> _list = [];
 
   void addFaker() async {
     state = const AsyncValue.loading();
@@ -42,19 +42,23 @@ class SearchUsersViewModels extends AsyncNotifier<List<UserModel>> {
     List<String> randomImgs = getRandomElements(images, 1, 1);
 
     final faker = Faker();
-    final newPost = UserModel(
-      userName: faker.person.firstName(),
+    final newPost = UserProfileModel(
+      uid: '',
+      name: faker.person.firstName(),
       bio: faker.person.name(),
       authorized: faker.randomGenerator.boolean(),
-      userImg: randomImgs[0],
+      // userImg: randomImgs[0],
       followers: faker.randomGenerator.integer(10000000, min: 2000),
+      link: "",
+      hasAvatar: false,
+      email: faker.internet.email(),
     );
     _list = [..._list, newPost];
     state = AsyncValue.data(_list);
   }
 
   @override
-  FutureOr<List<UserModel>> build() async {
+  FutureOr<List<UserProfileModel>> build() async {
     await Future.delayed(const Duration(seconds: 1));
     for (var i = 0; i < 10; i++) {
       ref.read(searchUsersProvider.notifier).addFaker();
@@ -64,6 +68,6 @@ class SearchUsersViewModels extends AsyncNotifier<List<UserModel>> {
 }
 
 final searchUsersProvider =
-    AsyncNotifierProvider<SearchUsersViewModels, List<UserModel>>(
+    AsyncNotifierProvider<SearchUsersViewModels, List<UserProfileModel>>(
   () => SearchUsersViewModels(),
 );

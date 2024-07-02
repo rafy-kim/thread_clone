@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,15 +51,22 @@ class _AttachPhotoState extends ConsumerState<AttachPhoto>
   @override
   void initState() {
     super.initState();
-    initPermissions();
+    // iOS 시뮬레이터에서는 카메라 사용 X
+    if (!kDebugMode || !Platform.isIOS) {
+      initPermissions();
+    } else {
+      setState(() {
+        _hasPermission = true;
+      });
+    }
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    _buttonAnimationController.dispose();
     if (_isCameraInitialized) {
       _cameraController.dispose();
+      _buttonAnimationController.dispose();
     }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
