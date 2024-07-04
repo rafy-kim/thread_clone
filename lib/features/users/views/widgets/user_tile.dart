@@ -40,9 +40,12 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(userImg);
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(userImg!), // 프로필 이미지 URL
+        backgroundImage:
+            userImg != "" ? NetworkImage(userImg!) : null, // 프로필 이미지 URL
+        child: Text(bio.split("@").first.toString().substring(0, 3)),
       ),
       title: Row(
         children: [

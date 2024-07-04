@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thread_clone/constants/sizes.dart';
 import 'package:thread_clone/features/search/view_models/search_users_view_models.dart';
+import 'package:thread_clone/features/search/view_models/search_view_models.dart';
 import 'package:thread_clone/features/users/views/widgets/user_tile.dart';
 import 'package:thread_clone/utils.dart';
 
@@ -15,6 +16,24 @@ class SearchScreen extends ConsumerStatefulWidget {
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
   final ScrollController _scrollController = ScrollController();
+  String email = "";
+
+  late final TextEditingController _textEditingController =
+      TextEditingController(text: email);
+
+  void _onSearchChanged(String value) {
+    print("Searching form $value");
+    setState(() {
+      email = value;
+    });
+  }
+
+  void _onSearchSubmitted(String value) {
+    print("Submitted $value");
+    setState(() {
+      email = value;
+    });
+  }
 
   @override
   void initState() {
@@ -47,7 +66,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(searchUsersProvider).when(
+    return ref.watch(searchProvider(email)).when(
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
@@ -88,7 +107,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     ),
                   ),
                   SliverPersistentHeader(
-                    delegate: _SliverSearchBarDelegate(),
+                    delegate: _SliverSearchBarDelegate(
+                      textEditingController: _textEditingController,
+                      onSearchChanged: _onSearchChanged,
+                      onSearchSubmitted: _onSearchSubmitted,
+                    ),
                     // pinned: true, // CupertinoSearchTextField 고정
                     floating: true,
                   ),
@@ -97,7 +120,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     itemCount: users.length,
                     itemBuilder: (context, index) => UserTile(
                       userName: users[index].name,
-                      bio: users[index].bio,
+                      bio: users[index].email,
                       userImg: "",
                       authorized: users[index].authorized,
                       followers: users[index].followers,
@@ -117,6 +140,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 }
 
 class _SliverSearchBarDelegate extends SliverPersistentHeaderDelegate {
+  final TextEditingController _textEditingController;
+  final Function _onSearchChanged;
+  final Function _onSearchSubmitted;
+
+  _SliverSearchBarDelegate({
+    required TextEditingController textEditingController,
+    required Function onSearchChanged,
+    required Function onSearchSubmitted,
+  })  : _textEditingController = textEditingController,
+        _onSearchChanged = onSearchChanged,
+        _onSearchSubmitted = onSearchSubmitted;
+
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -126,6 +161,10 @@ class _SliverSearchBarDelegate extends SliverPersistentHeaderDelegate {
       color: isDark ? Colors.black : Colors.white,
       alignment: Alignment.center,
       child: CupertinoSearchTextField(
+        placeholder: "Search Email",
+        controller: _textEditingController,
+        onChanged: (value) => _onSearchChanged(value),
+        onSubmitted: (value) => _onSearchSubmitted(value),
         style: TextStyle(
           color: isDark ? Colors.white : Colors.black,
         ),
