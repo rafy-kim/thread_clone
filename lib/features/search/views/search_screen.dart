@@ -26,6 +26,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     setState(() {
       email = value;
     });
+    ref.read(searchProvider.notifier).updateSearchUsers(email);
   }
 
   void _onSearchSubmitted(String value) {
@@ -49,13 +50,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200) {
-      // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
-      for (var i = 0; i < 10; i++) {
-        ref.read(searchUsersProvider.notifier).addFaker();
-      }
-    }
+    // if (_scrollController.position.pixels >=
+    //     _scrollController.position.maxScrollExtent - 200) {
+    //   // 스크롤이 맨 아래에서 200픽셀 이내에 도달했을 때
+    //   for (var i = 0; i < 10; i++) {
+    //     ref.read(searchUsersProvider.notifier).addFaker();
+    //   }
+    // }
   }
 
   Future<void> _onRefresh() {
@@ -66,7 +67,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(searchProvider(email)).when(
+    return ref.watch(searchProvider).when(
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
